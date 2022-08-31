@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from time import sleep
 
 # set your desired value
-GAME_MINUTES = 5
+GAME_MINUTES = 1
 
 
 def click_for_n_seconds(n: float = 5):
@@ -67,8 +67,8 @@ cps = driver.find_element(By.ID, "cps").text
 print("Cookies/Second:", cps)
 
 # save data to file
-with open("scoreboard.txt", "a") as file:
+with open("log.txt", "a") as file:
     file.write(
-        f"Start time: {__start__}\nEnd time: {__end__}\nCookies per second: {cps}\nCookies left: {final_cookies}\n\n")
+        f"Start time: {__start__}\nEnd time: {__end__}\n{cps}\nCookies left: {final_cookies}\n\n")
 
 driver.quit()
