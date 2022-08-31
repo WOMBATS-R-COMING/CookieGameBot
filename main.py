@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from datetime import datetime, timedelta
 from time import sleep
 
-GAME_TIME = 5
+GAME_TIME = 1
 
 
 def click_for_n_seconds(n: float = 5):
@@ -53,12 +53,18 @@ __start__ = datetime.now()
 print("\nStart:", __start__.time())
 
 # -------------game---------------
-while datetime.now() - __start__ < timedelta(minutes=GAME_TIME):
+while datetime.now() - __start__ < timedelta(minutes=GAME_TIME, seconds=-5):
     play_game()
 # -------------game---------------
 
-print("End:", datetime.now().time())
-print("\nFinal cookies:", driver.find_element(By.ID, "money").text)
-print("Cookies/Second:", driver.find_element(By.ID, "cps").text)
+__end__ = datetime.now().time()
+print("End:", __end__)
+final_cookies = driver.find_element(By.ID, "money").text
+print("\nFinal cookies:", final_cookies)
+cps = driver.find_element(By.ID, "cps").text
+print("Cookies/Second:", cps)
+
+with open ("scoreboard.txt", "a") as file:
+    file.write(f"Start time: {__start__}\nEnd time: {__end__}\nCookies per second: {cps}\nCookies left: {final_cookies}")
 
 driver.quit()
