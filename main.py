@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta
 from time import sleep
 
-GAME_TIME = 1
+GAME_MINUTES = 5
 
 
 def click_for_n_seconds(n: float = 5):
@@ -52,7 +52,7 @@ __start__ = datetime.now()
 print("\nStart:", __start__.time())
 
 # -------------game---------------
-while datetime.now() - __start__ < timedelta(minutes=GAME_TIME, seconds=-5):
+while datetime.now() - __start__ < timedelta(minutes=GAME_MINUTES):
     play_game()
 # -------------game---------------
 
