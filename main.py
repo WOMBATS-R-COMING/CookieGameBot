@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta
 from time import sleep
 
+# set your desired value
 GAME_MINUTES = 5
 
 
@@ -38,11 +39,14 @@ item_names = [
     "buyGrandma",
     "buyCursor"
 ]
+
+# change the path below if you want to try this code
 service = Service(r"C:\Users\Maciek\Programming\chromedriver.exe")
 driver = webdriver.Chrome(service=service)
 driver.get("http://orteil.dashnet.org/experiments/cookie/")
 cookie = driver.find_element(By.ID, "cookie")
 
+# this gets rid of the cookie warning
 sleep(2)
 notification = driver.find_element(By.CLASS_NAME, "cc_btn_accept_all")
 notification.click()
@@ -51,10 +55,9 @@ sleep(1)
 __start__ = datetime.now()
 print("\nStart:", __start__.time())
 
-# -------------game---------------
+# main game
 while datetime.now() - __start__ < timedelta(minutes=GAME_MINUTES):
     play_game()
-# -------------game---------------
 
 __end__ = datetime.now().time()
 print("End:", __end__)
@@ -63,6 +66,7 @@ print("\nFinal cookies:", final_cookies)
 cps = driver.find_element(By.ID, "cps").text
 print("Cookies/Second:", cps)
 
+# save data to file
 with open("scoreboard.txt", "a") as file:
     file.write(
         f"Start time: {__start__}\nEnd time: {__end__}\nCookies per second: {cps}\nCookies left: {final_cookies}\n\n")
