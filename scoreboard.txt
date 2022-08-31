@@ -1,4 +1,7 @@
 Start time: 2022-08-31 14:19:52.345981
 End time: 14:20:51.952338
 Cookies per second: cookies/second : 45.8
-Cookies left: 871
+Cookies left: 871Start time: 2022-08-31 14:25:55.783701
+End time: 14:26:51.234441
+Cookies per second: cookies/second : 48.4
+Cookies left: 96

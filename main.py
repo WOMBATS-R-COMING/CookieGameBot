@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from datetime import datetime, timedelta
 from time import sleep
 
@@ -64,7 +63,8 @@ print("\nFinal cookies:", final_cookies)
 cps = driver.find_element(By.ID, "cps").text
 print("Cookies/Second:", cps)
 
-with open ("scoreboard.txt", "a") as file:
-    file.write(f"Start time: {__start__}\nEnd time: {__end__}\nCookies per second: {cps}\nCookies left: {final_cookies}")
+with open("scoreboard.txt", "a") as file:
+    file.write(
+        f"Start time: {__start__}\nEnd time: {__end__}\nCookies per second: {cps}\nCookies left: {final_cookies}\n\n")
 
 driver.quit()
