@@ -1,11 +1,11 @@
-import time
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime, timedelta
 from time import sleep
+
+GAME_TIME = 5
 
 
 def click_for_n_seconds(n: float = 5):
@@ -16,8 +16,12 @@ def click_for_n_seconds(n: float = 5):
 
 
 def go_shopping():
-    global driver
-    money = driver.find_element(By.ID, "money").text
+    global driver, item_names
+    for name in item_names:
+        sleep(0.1)
+        upgrade = driver.find_element(By.ID, name)
+        if upgrade.get_attribute("class") != "grayed":
+            upgrade.click()
 
 
 def play_game():
@@ -25,7 +29,7 @@ def play_game():
     go_shopping()
 
 
-shopping_list = [
+item_names = [
     "buyTime machine",
     "buyPortal",
     "buyAlchemy lab",
@@ -47,10 +51,14 @@ sleep(1)
 
 __start__ = datetime.now()
 print("\nStart:", __start__.time())
-while datetime.now() - __start__ < timedelta(seconds=5):
+
+# -------------game---------------
+while datetime.now() - __start__ < timedelta(minutes=GAME_TIME):
     play_game()
+# -------------game---------------
+
 print("End:", datetime.now().time())
-print("\nFinal cookies:",driver.find_element(By.ID, "money").text)
-print("Cookies/Second:",driver.find_element(By.ID, "cps").text)
+print("\nFinal cookies:", driver.find_element(By.ID, "money").text)
+print("Cookies/Second:", driver.find_element(By.ID, "cps").text)
 
 driver.quit()
